@@ -40,6 +40,9 @@ public class EmpruntServlet extends HttpServlet {
 		response.setContentType("text/html");         
 		PrintWriter out = response.getWriter(); // encodage Unicode  cible (Html). 
 		out.println("<html><body>");
+		out.println("<p>montant: "+montant+"</p>");
+		out.println("<p>duree: "+duree +"</p>");
+		out.println("<p>tauxInteret: "+tauxInteret +"</p>");
 		out.println("<p>mensualite=<b>"+mensualite+"</b></p>");
 		out.println("</body></html>");
 		//run as / maven install pour générer le fichier .war dans target
