@@ -17,7 +17,7 @@ if(sHt!=null && sTaux !=null){
 	tva=ht*taux/100;	ttc=ht+tva;
 }
 %>
-  <form method="GET">
+  <form method="GET"> <!-- sans action="" la page se rappelle elle meme -->
        ht : <input name="ht" value="<%=ht%>"/> <br/>
        taux : <input name="taux" value="<%=taux%>"/> <br/>
        <input type="submit" value="calculer tva et ttc" /> <br/>
