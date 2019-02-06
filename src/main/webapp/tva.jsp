@@ -26,5 +26,6 @@ if(sHt!=null && sTaux !=null){
   <hr/>
   tva = <%=tva%> <br/>
   ttc = <%=ttc%> <br/>
+<%@ include file="myfooter.jsp" %>
 </body>
 </html>
