@@ -16,24 +16,35 @@ public void jspInit(){
 	List<String> listEltsPrintemps = new ArrayList<String>();
 	listEltsPrintemps.add("fleur"); listEltsPrintemps.add("vert");
 	mapSaisonListElts.put("printemps",listEltsPrintemps);
-	//...
+	List<String> listEltsEte = new ArrayList<String>();
+	listEltsEte.add("soleil"); listEltsEte.add("plage");
+	mapSaisonListElts.put("ete",listEltsEte);
+	List<String> listEltsAutomne = new ArrayList<String>();
+	listEltsAutomne.add("feuille morte"); listEltsAutomne.add("vendanges");
+	mapSaisonListElts.put("automne",listEltsAutomne);
 }
 %>
 <body>
+   <%@ include file="myheader.jsp" %>
    <%
    String saison = request.getParameter("saison");
    List<String> listeElts = mapSaisonListElts.get(saison);
    %>
    <form>
-      saison: <select name="saison" >
+      saison: <select name="saison" ><option>????</option>
          <option>hiver</option><option>printemps</option><option>ete</option><option>automne</option>
       </select> <br/>
       <input type="submit">
    </form>
    pour saison <%=saison%> , les choses en correspondances sont : <br/>
-   <%=listeElts %>
+   <!-- <%=listeElts %> -->
    <ul>
-      <li>...</li> <!-- a répéter en boucle for(...) { ... } -->
+     <% if(listeElts!=null)
+    	 for(String elt : listeElts)
+    	 {%>
+      	<li><%=elt%></li>
+      <% }%>
    </ul>
+   <%@ include file="myfooter.jsp" %>
 </body>
 </html>
