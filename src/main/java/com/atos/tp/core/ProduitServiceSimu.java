@@ -25,8 +25,9 @@ public class ProduitServiceSimu implements ProduitService {
 
 	@Override
 	public List<String> getAllCategories() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> listeCat = new ArrayList<String>();
+		listeCat.add("ordinateur");listeCat.add("imprimante");
+		return listeCat;
 	}
 
 }
