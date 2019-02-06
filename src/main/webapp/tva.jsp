@@ -7,6 +7,7 @@
 <title>tva</title>
 </head>
 <body>
+<%@ include file="myheader.jsp" %>
 <%
 Double tva=null; Double ttc=null;
 Double ht=null; Double taux=null;
