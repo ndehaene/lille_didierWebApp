@@ -7,7 +7,11 @@
 <title>choixCategorie</title>
 </head>
 <body>
-     ${message} <!-- dollar accollade nomLogiqueDelaChosePreparareeParServlet -->
+    <%
+    String message = (String) request.getAttribute("message");
+    if(message==null) message="";
+    %>
+    <%=message%>
     <hr/>
     <form method="get" action="./MyMvcServlet">
        categorie: <input type="text" name="categorie" ><br/>

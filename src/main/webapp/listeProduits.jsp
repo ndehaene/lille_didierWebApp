@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,19 +8,20 @@
 <title>listeProduits</title>
 </head>
 <body>
-<%@ page import="java.util.List,com.atos.tp.core.Produit" %>
-<%
-List<Produit> listeProduits = (List<Produit>)
-                   request.getAttribute("listeProd");
-%>
 <table border="1">
-   <tr><th>id</th><th>label</th><th>prix</th></tr>
-   <%for(Produit prod : listeProduits){ %>
-    <tr><td><%=prod.getId()%></td>
-         <td><%=prod.getLabel()%></td>
-         <td><%=prod.getPrix()%></td>
+   <tr><th>id</th><th>label</th><th>Prix</th></tr>
+   <!-- items permet de préciser sur quoi on boucle , ici le nom logique listeProd 
+        stocké par le servlet dans le scope request via .setAttribute() 
+        var permet de préciser le nom de la variable qui permet d'accéder successivement
+        à chaque élément de la liste
+        -->
+   <c:forEach items="${listeProd}" var="prod">
+    <tr> <td>${prod.id}</td>
+         <td>${prod.label}</td> <!-- prod.label pour accéder à la sous partie .label
+                                     de l'objet prod (classe java Produit) -->
+         <td>${prod.prix}</td>
      </tr>
-   <%} %>
+   </c:forEach>
 </table>
 <hr/>
 <a href="choixCategorie.jsp">choisir une autre categorie</a>

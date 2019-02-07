@@ -24,6 +24,14 @@
 	    <!-- deja fourni par serveur JEE jboss-wildfly ou partiellement
 	      par tomcat -->
 	</dependency>
+	
+	<!-- recuperer le paquet de balises jstl (c:forEach , c:if , ...) 
+	     qui est facultatif et pas systématiquement utilisé dans tomcat -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	</dependency>
  
   
   </dependencies>
