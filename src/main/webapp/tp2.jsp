@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 <title>tp2</title>
 </head>
 <%@ page import="java.util.Map,java.util.List,java.util.ArrayList,java.util.HashMap" %>

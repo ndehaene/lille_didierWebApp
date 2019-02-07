@@ -3,10 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta charset="ISO-8859-1">
 <title>choixCategorie</title>
 </head>
 <body>
+     <%@ include file="myheader.jsp" %>
      ${message} <!-- dollar accollade nomLogiqueDelaChosePreparareeParServlet -->
     <hr/>
     <form method="get" action="./MyMvcServlet">

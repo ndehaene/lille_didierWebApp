@@ -4,10 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta charset="ISO-8859-1">
 <title>listeProduits</title>
 </head>
 <body>
+<%@ include file="myheader.jsp" %>
 <table border="1">
    <tr><th>id</th><th>label</th><th>Prix</th></tr>
    <!-- items permet de préciser sur quoi on boucle , ici le nom logique listeProd 
