@@ -12,6 +12,7 @@
      ${message} <!-- dollar accollade nomLogiqueDelaChosePreparareeParServlet -->
     <hr/>
     <form method="get" action="./MyMvcServlet">
+       <input type="hidden" name="task" value="rechercherProduits" />
        categorie: <input type="text" name="categorie" >(ex: ordinateur ou imprimante)<br/>
        <input type="submit" value="rechercher produits" />
     </form>

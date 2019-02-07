@@ -34,6 +34,20 @@ public class MyMvcServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//controleur principal ("front-controller") déleguant vers sous méthodes do...Xy()
+		//selon valeur du champ caché "task" de la page html/jsp appelante:
+		String task = request.getParameter("task");
+		switch(task) {
+			case "tacheXy":	doTacheXy(request,response); break;
+			case "rechercherProduits": doRechercherProduits(request,response);  break;
+		}
+	}
+	
+	protected void doTacheXy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    //code d'une tache ici ou bien dans classe annexe (appelée sous-controleur) .
+	}
+		
+	protected void doRechercherProduits(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//récupérer valeur saisie (ou sélectionnée):
 		String categorie = request.getParameter("categorie");
 		//on créer une instance de la classe ProduitServiceJdbc
