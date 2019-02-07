@@ -21,5 +21,8 @@ List<Produit> listeProduits = (List<Produit>)
      </tr>
    <%} %>
 </table>
+<hr/>
+<a href="choixCategorie.jsp">choisir une autre categorie</a>
+<%@ include file="myfooter.jsp" %>
 </body>
 </html>

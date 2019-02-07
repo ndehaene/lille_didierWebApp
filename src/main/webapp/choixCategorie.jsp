@@ -17,5 +17,6 @@
        categorie: <input type="text" name="categorie" ><br/>
        <input type="submit" value="rechercher produits" />
     </form>
+ <%@ include file="myfooter.jsp" %>
 </body>
 </html>
