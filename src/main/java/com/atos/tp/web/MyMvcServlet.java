@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.atos.tp.core.Produit;
 import com.atos.tp.core.ProduitService;
+import com.atos.tp.core.ProduitServiceJdbc;
 import com.atos.tp.core.ProduitServiceSimu;
 
 /**
@@ -35,15 +36,20 @@ public class MyMvcServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//récupérer valeur saisie (ou sélectionnée):
 		String categorie = request.getParameter("categorie");
-		//on créer une instance de la classe ProduitServiceSimu
+		//on créer une instance de la classe ProduitServiceJdbc
 		//pour pouvoir appeler dessus la méthode produitsSelonCategorie()
-		ProduitService produitService = new ProduitServiceSimu();
-		                            // ProduitServiceSimu.getInstance(); //singleton
-		                            // new ProduitServiceJdbc();
+		ProduitService produitService = null;
+		List<Produit> listeProduits = null;
+		produitService = new ProduitServiceJdbc();
 		//on appelle la méthode sur le service et on stocke le resultat dans une
 		//variable/référence locale listeProduits.
-		List<Produit> listeProduits = produitService.produitsSelonCategorie(categorie);
+		listeProduits = produitService.produitsSelonCategorie(categorie);
 		String pageJsp=null;
+		if(listeProduits==null || listeProduits.isEmpty() ) {
+			//SECOND ESSAI en version Simu ICI EN TP (si base de donnée inacessible) 
+			produitService = new ProduitServiceSimu();
+            listeProduits = produitService.produitsSelonCategorie(categorie);
+		}
 		if(listeProduits!=null) {
 			pageJsp="/listeProduits.jsp";
 			//le servlet stocke dans partie "attribute" de l'objet request
