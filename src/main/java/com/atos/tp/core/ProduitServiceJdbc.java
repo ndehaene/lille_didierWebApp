@@ -4,14 +4,42 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 public class ProduitServiceJdbc implements ProduitService {
 	
 	private Connection etablishConnection() {
+		return etablishConnectionDirect();
+		//return etablishConnectionViaJndi();
+	}
+	
+	
+	private Connection etablishConnectionViaJndi() {
+		Connection cn = null;
+		try {
+			InitialContext ic = new InitialContext();
+			String dsName="java:comp/env/"+"jdbc/produitDS";
+			//NB jdbc/produitDS configuré dans WEB-INF/web.xml 
+			// renvoie vers jdbc/produitDS de META-INF/context.xml 
+			//  ou de tomcat.../conf/server.xml
+		
+			System.out.println("dsName="+dsName);
+			DataSource ds = (DataSource) ic.lookup(dsName);
+			cn=ds.getConnection();//SANS AUCUN PARAMETRE ICI
+			//PERFORMANCES QUELQUEFOIS AMELIOREES (avec jboss, websphere, ....)
+			//CAR recyclage de connection (pooled dataSource)
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cn;
+	}
+	
+	private Connection etablishConnectionDirect() {
 		Connection cn = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
