@@ -33,21 +33,29 @@ public class MyMvcServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//récupérer valeur saisie (ou séléctionnée):
+		//récupérer valeur saisie (ou sélectionnée):
 		String categorie = request.getParameter("categorie");
 		//on créer une instance de la classe ProduitServiceSimu
 		//pour pouvoir appeler dessus la méthode produitsSelonCategorie()
 		ProduitService produitService = new ProduitServiceSimu();
+		                            // ProduitServiceSimu.getInstance(); //singleton
 		                            // new ProduitServiceJdbc();
 		//on appelle la méthode sur le service et on stocke le resultat dans une
 		//variable/référence locale listeProduits.
 		List<Produit> listeProduits = produitService.produitsSelonCategorie(categorie);
-		//le servlet stocke dans partie "attribute" de l'objet request
-		//une association entre le nom logique "listeProd" et les données préparées
-		request.setAttribute("listeProd", listeProduits);
+		String pageJsp=null;
+		if(listeProduits!=null) {
+			pageJsp="/listeProduits.jsp";
+			//le servlet stocke dans partie "attribute" de l'objet request
+			//une association entre le nom logique "listeProd" et les données préparées
+			request.setAttribute("listeProd", listeProduits);
+		}else {
+			pageJsp="/choixCategorie.jsp";
+			request.setAttribute("message", "categorie invalide");
+		}
 		//on construit l'objet de redirection vers la page jsp
 		RequestDispatcher rd = 
-				this.getServletContext().getRequestDispatcher("/listeProduits.jsp");
+				this.getServletContext().getRequestDispatcher(pageJsp);
 		//le .forward() demande à la page jsp de finir le travail:
 		// afficher les valeurs en html
 		rd.forward(request,response);
