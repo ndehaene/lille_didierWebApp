@@ -9,6 +9,28 @@
 </head>
 <body>
 <%@ include file="myheader.jsp" %>
+
+     <%
+     //dans une page JSP les variables (ou objets) session et application
+     //sont créés d'office ; il suffit de les utiliser
+     //Dans une méthode doGet() d'un servlet 
+     //il faut ecrire 
+     //HttpSession session=request.getSession();
+     //ServletContext application = this.getServletContext();
+     Integer cptA = (Integer)application.getAttribute("cptA");
+     if(cptA==null){ cptA = new Integer(1);
+     }else{    	 cptA = new Integer(cptA+1);     }
+     application.setAttribute("cptA",cptA);
+     
+     Integer cptU = (Integer)session.getAttribute("cptU");
+     if(cptU==null){ cptU = new Integer(1);
+     }else{  cptU = new Integer(cptU+1);   }
+     session.setAttribute("cptU",cptU);
+     %>
+
+     compteur (en scope=application) = <%=cptA%>
+     compteur (en scope=session utilisateur) = <%=cptU%>
+
     <%String nom = request.getParameter("nom"); 
     if(nom==null)
     	nom="";
