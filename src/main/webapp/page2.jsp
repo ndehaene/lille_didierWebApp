@@ -10,11 +10,23 @@
 <body>
 <%@ include file="myheader.jsp" %>
     <%
-    String nom = (String) session.getAttribute("nom");
+    String nom = null;
+    Object deconnexion = request.getParameter("deconnexion");
+    if(deconnexion!=null){
+    	session.invalidate();
+    	//attention : juste apres .invalidate() , l'objet session est inutilisable
+    }
+    else{
+       nom = (String) session.getAttribute("nom");
+    }
     %>
 	nom (enregistré sur page 1): <%=nom%>
 	<hr/>
 	<a href="page1.jsp" > revenir sur page 1 (pour changer le nom)</a>
+	<hr/>
+	<form >
+	   <input type="submit" value="deconnexion" name="deconnexion"/>
+	</form>
 <%@ include file="myfooter.jsp" %>
 </body>
 </html>
