@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,5 +106,35 @@ public class ProduitServiceJdbc implements ProduitService {
 				e.printStackTrace();
 			}
 	}
+
+
+	@Override
+	public void insertIntoCategory(Categorie cat) {
+		Connection cn = etablishConnection();
+		try {  PreparedStatement pst = cn.prepareStatement(
+				"INSERT INTO Categorie(label) VALUES(?)" , Statement.RETURN_GENERATED_KEYS);
+			 pst.setString(1 /* numero du ? à remplacer */, cat.getLabel());
+			 pst.executeUpdate();
+			 cat.setId(getAutoIncrPk(pst)); //récupérer l'id auto incrémenté
+			 pst.close();//fermetures dans l'ordre inverse des ouvertures
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeCn(cn);
+		}
+	}
+	
+	public static Long getAutoIncrPk(Statement st) {
+		Long pk=null;
+		try {
+			ResultSet rsKeys = st.getGeneratedKeys();
+			if(rsKeys.next())
+				pk = rsKeys.getLong(1);
+			rsKeys.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return pk;
+}
 
 }

@@ -29,5 +29,10 @@ public class ProduitServiceSimu implements ProduitService {
 		listeCat.add("ordinateur");listeCat.add("imprimante");
 		return listeCat;
 	}
+	@Override
+	public void insertIntoCategory(Categorie cat) {
+		//sera codé la semaine des 4 jeudis
+		
+	}
 
 }

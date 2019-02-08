@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.atos.tp.core.Categorie;
 import com.atos.tp.core.Produit;
 import com.atos.tp.core.ProduitService;
 import com.atos.tp.core.ProduitServiceJdbc;
@@ -39,8 +40,22 @@ public class MyMvcServlet extends HttpServlet {
 		String task = request.getParameter("task");
 		switch(task) {
 			case "tacheXy":	doTacheXy(request,response); break;
+			case "ajouterCategorie":	doAjouterCategorie(request,response); break;
 			case "rechercherProduits": doRechercherProduits(request,response);  break;
 		}
+	}
+	
+	protected void doAjouterCategorie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    //code d'une tache ici ou bien dans classe annexe (appelée sous-controleur) .
+		ProduitService produitService = new ProduitServiceJdbc();
+		String labelCategorie = request.getParameter("categorie");
+		Categorie cat = new Categorie(null,labelCategorie);
+		produitService.insertIntoCategory(cat);
+		List<String> listeCat = produitService.getAllCategories();
+		request.setAttribute("listeCat", listeCat);
+		RequestDispatcher rd = 
+				this.getServletContext().getRequestDispatcher("/allCategories.jsp");
+		rd.forward(request,response);
 	}
 	
 	protected void doTacheXy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
