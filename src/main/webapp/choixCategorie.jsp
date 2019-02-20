@@ -9,7 +9,7 @@
 </head>
 <body>
      <%@ include file="myheader.jsp" %>
-     ${message} <!-- dollar accollade nomLogiqueDelaChosePreparareeParServlet -->
+     ${message} <!-- dollar accolade nomLogiqueDelaChosePreparareeParServlet -->
     <hr/>
     <form method="get" action="./MyMvcServlet">
        <input type="hidden" name="task" value="rechercherProduits" />
